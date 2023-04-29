@@ -1,13 +1,14 @@
 const Sequelize = require('sequelize');
 global.Sequelize=Sequelize;
 const db={};
-const config=require('../config/config.json');
+const config=require('../config');
+const mysql=require('mysql2');
 
 const makeSureDatabaseConnect=()=>new Promise((resolve, reject)=>{
     console.log('Database module start');
-    const sequelize=new Sequelize(config.development.database, config.development.username,config.development.password,{
-        dialect:'postgresql',
-        host:config.development.host,
+    const sequelize=new Sequelize(config.database, config.user,config.password,{
+        dialect:'mysql',
+        host:config.host,
         logging:false
     });
 
@@ -33,4 +34,15 @@ const makeSureDatabaseConnect=()=>new Promise((resolve, reject)=>{
             reject()
         });
 });
+
+// const makeSureMySqlConnect=()=>new Promise((resolve, reject)=>{
+//     mysql.createConnection({
+//         host:config.host,
+//         user:config.user,
+//         password:config.password,
+//         database:config.database,
+//         port:config.port
+//     });
+  
+// })
 module.exports=makeSureDatabaseConnect;

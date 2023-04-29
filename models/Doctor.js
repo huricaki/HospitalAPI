@@ -1,9 +1,4 @@
-const {Sequelize, Model, DataType, DataTypes}=require('sequelize');
-const sequelize=new Sequelize('database','username','password',{
-    dialect:'sqlite',
-    storage:'./database.sqlite'
-});
-const Doctor=sequelize.define('Doctor',{
+module.exports=  sequelize.define('Doctor',{
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
@@ -39,6 +34,5 @@ const Doctor=sequelize.define('Doctor',{
     }
 
 },{
-    tableName:'Doctor'
+    tableName:'Doctor',
 });
-module.exports=Doctor;

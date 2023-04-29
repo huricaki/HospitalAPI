@@ -1,8 +1,7 @@
 const express =require('express');
 const bodyParser=require('body-parser');
 const app=express();
-const doctorRoutes=require('./controllers/doctor-controller');
-const config=require('./config/config.json');
+const config=require('./config');
 const cors=require('cors');
 
 app.use(cors());
@@ -13,16 +12,18 @@ require('./Middlewares/database-connect')()
 .then(()=>{
   const router =express.Router();
   const routes = require('./routes');
+  console.log(process.cwd());
+  // router(app, routes, { controllerDirectory: `${process.cwd()}/controllers/`, controllerFileSuffix: '-controller.js', logRoutesList: false })
 
-  router(app, routes, { controllerDirectory: `${process.cwd()}/src/controllers/`, controllerFileSuffix: '-controller.js', logRoutesList: false })
-  
-  if (config.env === 'development' || config.env === 'production') {
+  app.use('/api/doctor', routes);
+
+  if (config.env==='development') {
     console.log("server listen");
     const http = require('http')
     const httpServer = http.createServer(app)
-    httpServer.listen(config.port, () => {
-      if (config.env === 'development') {
-        console.log(`${config.session.name} service is running at http://localhost:${httpServer.address().port} for public usage`)
+    httpServer.listen(3307, () => {
+      if (config.env==='development') {
+        console.log(`${config.database} service is running at http://localhost:${httpServer.address().port} for public usage`)
       }
     })
   }
