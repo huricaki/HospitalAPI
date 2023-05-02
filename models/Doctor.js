@@ -1,3 +1,4 @@
+const { DataTypes } = require('sequelize');
 module.exports=  sequelize.define('Doctor',{
     id:{
         type:DataTypes.INTEGER,

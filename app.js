@@ -3,19 +3,18 @@ const bodyParser=require('body-parser');
 const app=express();
 const config=require('./config');
 const cors=require('cors');
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
 require('./Middlewares/database-connect')()
 .then(()=>{
-  const router =express.Router();
-  const routes = require('./routes');
-  console.log(process.cwd());
+  //const router =express.Router();
+  const routes=require('./routes');
+  console.log("efsdd0 0"+process.cwd());
   // router(app, routes, { controllerDirectory: `${process.cwd()}/controllers/`, controllerFileSuffix: '-controller.js', logRoutesList: false })
-
-  app.use('/api/doctor', routes);
+  app.use('/', routes);
+ // app.use('/api/doctor', routes);
 
   if (config.env==='development') {
     console.log("server listen");
