@@ -1,0 +1,3 @@
+* doctor-controller.js dosyasından db.sequelize işlemlerini kullanmak için database-connect.js de db ve sequelize işlemlerini global olarak tanımladık !!!buna dikkat !!!
+* create fonksiyonu tanımlanmamış olarak alınan hata model klasörü içerisinde model-initiliaze.js dosyası içerisinde modelleri init etmemekten kaynaklanıyor doctor nesnesini bulamadığı için create fonk bulamıyor haliyle!!!!
+* 
