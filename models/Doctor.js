@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-module.exports=  sequelize.define('Doctor',{
+module.exports=  sequelize.define('doctor',{
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
