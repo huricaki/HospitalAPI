@@ -1,16 +1,24 @@
-//const Doctor=require('../models/Doctor');
-//const express=require('express');
-//const postDoctor = require('./postDoctor');
- //const router=express.Router();
+
  const bodyParser = require('body-parser');
 console.log("addDoc fonk come");
+
+async function getDoctor (req,res,next){
+    console.log('getDoctor method');
+    db.doctor.findAll()
+        .then(doctors=>{
+            res.status(200).json(doctors.map(doctor=>{
+                console.log('response');
+                return doctor
+            }))
+        })
+        .catch(err=>sequelizeErrorCatcher(err))
+        .catch(next)
+}
+
 async function addDoctor(req,res,next){
     console.log('/api/AddDoctor method tetik');
     const trans =await db.sequelize.transaction();
     bodyParser.json(req.body);
-//     express.json(req.body);
-//    console.log(express.json(req.body));
-
     try{
         console.log(req.body);
         //Doctor.create(req.body);
@@ -40,7 +48,8 @@ async function addDoctor(req,res,next){
 };
 
 module.exports = {
-    addDoctor
+    addDoctor,
+    getDoctor
 };
 
 
